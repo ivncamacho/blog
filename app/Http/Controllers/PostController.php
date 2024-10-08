@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+
 class PostController
 {
     public function index()
     {
-        $posts = [
-            ['title' => 'Post 1'],
-            ['title' => 'Post 2'],
-            ['title' => 'Post 3'],
-            ['title' => 'Post 4'],
-    ];
+        $posts = DB::table('posts')->get();
+
+        dd($posts->first);
+
+        return view('blog', compact('posts'));
 
 }
 }
