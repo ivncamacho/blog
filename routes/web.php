@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('home');
 Route::view('contacto', 'contact')->name('contact');
-Route::get('blog', \App\Http\Controllers\PostController::class )->name('blog');
+Route::get('blog', [\App\Http\Controllers\PostController::class, 'index'])->name('blog');
 Route::view('nosotros', 'about')->name('about');
 
 Route::get('/dashboard', function () {
