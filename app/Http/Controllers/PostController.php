@@ -13,4 +13,7 @@ class PostController
         return view('blog', compact('posts'));
 
 }
+    public function show(Post $post){
+        
+    }
 }
