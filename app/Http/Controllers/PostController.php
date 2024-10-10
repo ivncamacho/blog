@@ -18,16 +18,21 @@ class PostController
 
         return view('posts.show', compact('post'));
     }
+
     public function create()
     {
         return view('posts.create');
     }
+
     public function store(Request $request)
     {
         $post = new Post();
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->save();
+
+        session()->flash('status', 'Post created successfully');
+
         return to_route('posts.index');
     }
 }
