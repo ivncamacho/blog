@@ -29,7 +29,10 @@ class PostController
         $request -> validate([
             'title' => 'required|min:5|max:20',
             'body' => 'required',
-            ]);
+            ], [
+                'title.required' => 'El titulo es obligatorio',
+                'body.required' => 'El contenido es obligatorio',
+         ]);
 
 
 
