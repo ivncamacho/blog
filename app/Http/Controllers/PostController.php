@@ -27,7 +27,7 @@ class PostController
     public function store(Request $request)
     {
         $request -> validate([
-            'title' => 'required',
+            'title' => 'required|min:5|max:20',
             'body' => 'required',
             ]);
 
