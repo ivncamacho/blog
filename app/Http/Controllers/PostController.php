@@ -26,17 +26,13 @@ class PostController
 
     public function store(Request $request)
     {
-        $request -> validate([
+        $request->validate([
             'title' => 'required|min:5|max:20',
             'body' => 'required',
-            ], [
-                'title.required' => 'El titulo es obligatorio',
-                'body.required' => 'El contenido es obligatorio',
-         ]);
-
-
-
-
+        ], [
+            'title.required' => 'El titulo es obligatorio',
+            'body.required' => 'El contenido es obligatorio',
+        ]);
         $post = new Post();
         $post->title = $request->input('title');
         $post->body = $request->input('body');
@@ -45,5 +41,10 @@ class PostController
         session()->flash('status', 'Post created successfully');
 
         return to_route('posts.index');
+    }
+    public function edit(Post $post)
+    {
+        return view('posts.edit', compact('post'));
+
     }
 }

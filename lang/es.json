@@ -17,6 +17,8 @@
     "Current Password": "Contraseña actual",
     "Dashboard": "Panel",
     "Delete Account": "Borrar cuenta",
+    "Edit": "Editar",
+    "Edit post": "Editar publicacion",
     "Email": "Correo electrónico",
     "email": "El campo :attribute no es un correo válido.",
     "Email Password Reset Link": "Enviar enlace para restablecer contraseña",
