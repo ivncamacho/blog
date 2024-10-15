@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use LaravelLang\Publisher\Console\Update;
 
 class PostController
 {
@@ -26,23 +29,12 @@ class PostController
         return view('posts.create', ['post' => new Post()]);
     }
 
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        $request->validate([
-            'title' => 'required|min:5|max:20',
-            'body' => 'required',
-        ], [
-            'title.required' => 'El titulo es obligatorio',
-            'body.required' => 'El contenido es obligatorio',
-        ]);
-        $post = new Post();
-        $post->title = $request->input('title');
-        $post->body = $request->input('body');
-        $post->save();
 
-        session()->flash('status', 'Post created successfully');
+        Post::create($request -> validated());
 
-        return to_route('posts.index');
+        return to_route('posts.index')->with('status', 'Post created successfully');
     }
 
     public function edit(Post $post)
@@ -51,16 +43,11 @@ class PostController
 
     }
 
-    public function update(Request $request, Post $post)
+    public function update(UpdatePostRequest $request, Post $post)
     {
-        $request->validate([
-            'title' => 'required|min:5',
-            'body' => 'required',
-        ]);
-        $post->title = $request->input('title');
-        $post->body = $request->input('body');
-        $post->save();
-        session()->flash('status', 'Post updated successfully');
-        return to_route('posts.show', $post);
+        $post -> update($request ->validated());
+
+
+        return to_route('posts.show', $post)->with('status', 'Post updated successfully');
     }
 }
