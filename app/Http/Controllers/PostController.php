@@ -50,4 +50,9 @@ class PostController
 
         return to_route('posts.show', $post)->with('status', 'Post updated successfully');
     }
+    public function destroy(Post  $post)
+    {
+        $post ->delete();
+        return to_route('posts.index')->with('status', 'Post deleted successfully');
+    }
 }
