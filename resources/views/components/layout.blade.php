@@ -9,7 +9,6 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="flex h-screen flex-col bg-slate-100 selection:bg-sky-600 selection:text-sky-50 dark:bg-slate-950">
-
 <x-partials.navigation />
 
 @session('status')
@@ -17,7 +16,8 @@
     {{ $value }}
 </div>
 @endsession
-<main class="flex-1 p-4" >
+
+<main class="flex-1 p-4">
     {{ $slot }}
 </main>
 
@@ -98,5 +98,6 @@
         </div>
     </div>
 </footer>
+
 </body>
 </html>
