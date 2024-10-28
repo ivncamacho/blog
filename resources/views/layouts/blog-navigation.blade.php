@@ -241,6 +241,7 @@
                     <button
                         id="toggle-session-menu"
                         class="ml-4 rounded-full text-slate-500 transition-colors hover:text-sky-500 focus:ring-2 focus:ring-slate-200 focus:ring-offset-1"
+                        style="position: relative; top: 4px;"
                     >
                         <img
                             class="h-6 w-6 rounded-full"
