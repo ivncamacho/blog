@@ -232,19 +232,72 @@
                         </svg>
                         <span>System</span>
                     </button>
+
                 </div>
             </div>
-            <button
-                class="ml-4 rounded-full text-slate-500 transition-colors hover:text-sky-500 focus:ring-2 focus:ring-slate-200 focus:ring-offset-1"
-            >
-                <img
-                    class="h-6 w-6 rounded-full"
-                    src="https://ui-avatars.com/api?name=Ivan+Camacho"
-                    alt="Ivan Camacho"
-                />
-            </button>
-        </div>
-    </div>
+            @auth
+            <x-dropdown align="right" width="48">
+                <x-slot name="trigger">
+                    <button
+                        id="toggle-session-menu"
+                        class="ml-4 rounded-full text-slate-500 transition-colors hover:text-sky-500 focus:ring-2 focus:ring-slate-200 focus:ring-offset-1"
+                    >
+                        <img
+                            class="h-6 w-6 rounded-full"
+                            src="https://ui-avatars.com/api?name={{ Auth::user()->name }}+{{ Auth::user()->lastname }}"
+                            alt="User registered"
+                        />
+                    </button>
+                </x-slot>
+
+                <x-slot name="content">
+                    <x-dropdown-link :href="route('profile.edit')">
+                        {{ __('Profile') }}
+                    </x-dropdown-link>
+
+                    <!-- Authentication -->
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+
+                        <x-dropdown-link :href="route('logout')"
+                                         onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                            {{ __('Log Out') }}
+                        </x-dropdown-link>
+                    </form>
+                </x-slot>
+            </x-dropdown>
+    @endauth
+    @guest
+        <x-dropdown align="right" width="48">
+            <x-slot name="trigger">
+                <button
+                    id="toggle-session-menu"
+                    class="ml-4 rounded-full text-slate-500 transition-colors hover:text-sky-500 focus:ring-2 focus:ring-slate-200 focus:ring-offset-1"
+                    style="position: relative; top: 4px;"
+
+                >
+                    <img
+                        class="h-6 w-6 rounded-full"
+                        src="https://img.freepik.com/vector-premium/icono-perfil-avatar-predeterminado-imagen-usuario-redes-sociales-icono-avatar-gris-silueta-perfil-blanco-ilustracion-vectorial_561158-3408.jpg"
+                        alt=""
+                    />
+                </button>
+            </x-slot>
+
+            <x-slot name="content">
+                <x-dropdown-link :href="route('login')">
+                    {{ __('Login') }}
+                </x-dropdown-link>
+
+                <x-dropdown-link :href="route('register')">
+                    {{ __('Register') }}
+                </x-dropdown-link>
+                </form>
+            </x-slot>
+        </x-dropdown>
+    @endguest
+
     <div
         id="mobile-menu"
         class="hidden space-y-1 border-t pb-3 pt-2 dark:border-slate-500"
