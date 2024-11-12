@@ -17,10 +17,10 @@ class PostController extends Controller
     }
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::where('published_at', '<=', now())->get();
         return view('posts.index', compact('posts'));
-
     }
+
 
     public function show(Post $post)
     {
@@ -37,6 +37,7 @@ class PostController extends Controller
     {
 
         Post::create($request -> validated());
+
 
         return to_route('posts.index')->with('status', 'Post created successfully');
     }
