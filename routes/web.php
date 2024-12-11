@@ -8,6 +8,7 @@ Route::view('/', 'welcome')->name('home');
 Route::view('contacto', 'contact')->name('contact');
 Route::resource('blog', PostController::class)->names('posts')->parameters(['blog' => 'post']);
 Route::view('nosotros', 'about')->name('about');
+Route::get('/mis-posts', [PostController::class, 'misPosts'])->name('mis-posts')->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
